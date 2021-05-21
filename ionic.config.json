@@ -1,0 +1,7 @@
+{
+  "name": "ionic-side-menu-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

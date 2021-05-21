@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>user</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <form [formGroup]="ionicForm" (ngSubmit)="addUser()" novalidate>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="full">
+          <ion-label position="floating">Name</ion-label>
+          <ion-input formControlName="name" type="text"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.name.errors?.required">
+          Name is required.
+        </span>
+        <span class="error ion-padding" *ngIf="errorControl.name.errors?.minlength">
+          Name should be min 2 chars long.
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="full">
+          <ion-label position="floating">Email</ion-label>
+          <ion-input formControlName="email" type="email"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.required">
+          Email is required.
+        </span>
+        <span class="error ion-padding" *ngIf=" errorControl.email.errors?.pattern">
+          Please provide valid email id.
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item lines="full">
+          <ion-label position="floating">Password</ion-label>
+          <ion-input formControlName="password" type="password"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.required">
+          Password is required.
+        </span>
+        <span class="error ion-padding" *ngIf="errorControl.email.errors?.pattern">
+          Password should be min 5 chars long
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button type="submit" mdc-button raised style="width:100%">Ajouter User</button>
+      </ion-col>
+    </ion-row>
+  </form>
+  <ion-row>
+    <ion-col>
+      <ion-card *ngFor="let user of users | async">
+        <ion-button (click)="deleteUser(user.id)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+        <ion-button>
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-card-content>{{ user.username }}</ion-card-content>
+        <ion-card-content>{{ user.email }}</ion-card-content>
+        <ion-card-content>{{ user.password }}</ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>
